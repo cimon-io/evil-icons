@@ -1,11 +1,13 @@
 require "nokogiri"
-require "svg_optimizer"
+require "erb"
+require "evil_icons"
 
 module EvilIcons
 
   class Generator
     def initialize(svg_path)
-      @svg_path = svg_path
+      @svg_path       = svg_path
+      @templates_dir  = File.expand_path('../../templates', __FILE__)
     end
 
     def files
@@ -19,11 +21,12 @@ module EvilIcons
       File.read(file)
     end
 
-    def sprite
-      icons = files.map do |name|
+    def icons
+      files.map do |name|
         file        = read_svg(name)
-        optimized   = SvgOptimizer.optimize(file)
-        doc         = Nokogiri::HTML::DocumentFragment.parse(optimized)
+        doc         = Nokogiri::HTML::DocumentFragment.parse(file)
+
+        doc.css('*').remove_attr('fill')
 
         svg         = doc.at_css('svg')
         viewbox     = svg['viewbox']
@@ -31,28 +34,26 @@ module EvilIcons
         container   = g.empty? ? svg : g
 
         shape       = container.children.map {|c| c.to_s}.join('')
-        id          = File.basename(name, '.svg')
+        name        = File.basename(name, '.svg')
 
-        "\n\t<symbol id='#{id}-icon' viewBox='#{viewbox}'>\n\t\t#{shape}\n\t</symbol>"
+        { name: name, viewbox: viewbox, shape: shape }
       end
-
-      layout icons.join("\n")
     end
 
-    def banner
-      "<% # This file was automatically generated. Change it only by running rake evil_icons:process %>\n\n"
+    def optimize(code, template)
+      template == 'sprite.svg' ? code.gsub(/$\s+/, '') : code
     end
 
-    def layout(icons)
-      svg = banner
-      svg << '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display:none">'
-      svg << icons
-      svg << "\n</svg>"
+    def sprite(template)
+      view    = File.read File.join(@templates_dir, "#{template}.erb")
+      result  = ERB.new(view).result(binding)
+      optimize(result, template)
     end
 
-    def write_svg(sprite_path)
-      file = File.new(sprite_path, 'w')
-      file.write(sprite)
+    def generate(template)
+      path = File.join(EvilIcons.assets_dir, template)
+      file = File.new(path, 'w')
+      file.write sprite(template)
       file.close
     end
 
