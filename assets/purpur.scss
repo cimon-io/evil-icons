@@ -1,11 +1,11 @@
-@-webkit-keyframes evilicon-spinner {
+@-webkit-keyframes purpur-spinner {
   100% {
     -webkit-transform:rotate(360deg);
             transform:rotate(360deg);
   }
 }
 
-@keyframes evilicon-spinner {
+@keyframes purpur-spinner {
   100% {
     -webkit-transform:rotate(360deg);
             transform:rotate(360deg);
@@ -60,8 +60,8 @@
       width: 100%;
       height: 100%;
 
-      -webkit-animation: evilicon-spinner 1s steps(12) infinite;
-              animation: evilicon-spinner 1s steps(12) infinite;
+      -webkit-animation: purpur-spinner 1s steps(12) infinite;
+              animation: purpur-spinner 1s steps(12) infinite;
     }
   }
 

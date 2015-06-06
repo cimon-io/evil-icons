@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in evil-icons.gemspec
+# Specify your gem's dependencies in purpur.gemspec
 gemspec

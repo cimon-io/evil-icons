@@ -1,12 +1,11 @@
-module EvilIcons
+module Purpur
   class Engine < Rails::Engine
 
-    initializer 'evil_icons.view_helpers' do
+    initializer 'purpur.view_helpers' do
       ActiveSupport.on_load :action_view do
-        include ::EvilIcons::Helpers
+        include ::Purpur::Helpers
       end
     end
 
   end
 end
-

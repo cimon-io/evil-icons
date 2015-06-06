@@ -1,8 +1,8 @@
 require "nokogiri"
 require "erb"
-require "evil_icons"
+require "purpur"
 
-module EvilIcons
+module Purpur
 
   class Generator
     def initialize
@@ -10,7 +10,7 @@ module EvilIcons
     end
 
     def files
-      EvilIcons.icons
+      Purpur.icons
     end
 
     def read_svg(filename)
@@ -30,7 +30,7 @@ module EvilIcons
         container   = g.empty? ? svg : g
 
         shape       = container.children.map {|c| c.to_s}.join('')
-        name        = File.basename(name, EvilIcons::ICON_EXTENTION)
+        name        = File.basename(name, Purpur::ICON_EXTENTION)
 
         { name: name, viewbox: viewbox, shape: shape }
       end

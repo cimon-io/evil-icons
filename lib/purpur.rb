@@ -1,6 +1,6 @@
-require_relative "evil_icons/version"
+require_relative "purpur/version"
 
-module EvilIcons
+module Purpur
 
   ICON_SIZES = ({
     xsmall: 'xsm',
@@ -96,13 +96,13 @@ module EvilIcons
     end
 
     def sprite_file
-      File.join(assets_dir, 'images', 'sprite.svg')
+      File.join(assets_dir, 'images', 'purpur.svg')
     end
 
     private
 
     def register_engine
-      require_relative 'evil_icons/engine'
+      require_relative 'purpur/engine'
     end
 
     def register_sprockets
@@ -110,10 +110,10 @@ module EvilIcons
     end
 
     def register_helpers
-      require_relative 'evil_icons/helpers'
+      require_relative 'purpur/helpers'
     end
 
   end
 end
 
-EvilIcons.register!
+Purpur.register!

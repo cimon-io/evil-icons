@@ -1,32 +1,36 @@
+# PurPur
+
 Free ‘plug and play’ set of SVG icons designed specifically for web projects. Available as a Ruby gem. Just use icon names with your templates and styles — and all the rest will be done automagically.
 
-'EvilIcons' originaly made by [Alexander Madyankin] and [Roman Shamin].
-
-[Alexander Madyankin]:  https://twitter.com/outpunk
-[Roman Shamin]:         https://twitter.com/romanshamin
+The 'purpur' gem originaly based on '[EvilIcons](https://github.com/outpunk/evil-icons/)'.
 
 ### Supported browsers
-We support IE 9+, Firefox, Chrome, Safari (desktop and mobile), Opera, Android 4+.
-http://caniuse.com/#search=inline%20svg
+We support IE 11+, Firefox, Chrome, Safari (desktop and mobile), Opera, Android 4+.
 
 ### Using with rails
 
-Add the `'evil_icons'` gem to your Gemfile:
+Add the `'purpur'` gem to your Gemfile:
 ```ruby
-gem 'evil_icons', github: 'cimon-io/evil-icons'
+gem 'purpur'
 ```
 
-Add the Evil Icons require to your `application.css`:
+This gem is under deep development, so we would reccomend to use master branch:
+```ruby
+gem 'purpur', github: 'cimon-io/purpur'
+```
+
+
+Add the purpur icons require to your `application.css`:
 ```css
 /*
- *= require evil-icons
+ *= require purpur
  */
 ```
 
-Next, you have to place all svg-icons inside `app/assets/icons` folder and generate `sprite.svg` file:
+Next, you have to place all svg-icons inside `app/assets/icons` folder and generate `purpur.svg` file:
 
 ```console
-bin/rake evil_icons:process
+bin/rake purpur:process
 ```
 
 Finally, you can render the icon using the `icon_tag` helper.
