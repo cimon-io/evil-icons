@@ -16,9 +16,7 @@ namespace :evil_icons do
   task :normalize_filenames do
     binding.pry
 
-    filenames = Dir.entries(EvilIcons.images_dir).select { |f| File.extname(f) == '.svg' }
-
-    filenames.each do |old_name|
+    EvilIcons.icons.each do |old_name|
       next unless old_name.include?('_')
 
       new_name = File.join EvilIcons.images_dir, old_name.gsub('_', '-')

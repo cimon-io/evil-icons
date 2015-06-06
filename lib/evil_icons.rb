@@ -34,9 +34,9 @@ module EvilIcons
     end
 
     def icon_synonim(key)
-      h = ICON_SYNONIMS_HASH.with_indifferent_access
-      h.default_proc = ->(_, i) { i.to_s }
-      h
+      (ICON_SYNONIMS_HASH.with_indifferent_access.tap do |h|
+        h.default_proc = ->(_, i) { i.to_s }
+      end)[key]
     end
 
     def icon_key(n)
@@ -51,7 +51,6 @@ module EvilIcons
     end
 
     def icon_name(key)
-      binding.pry
       icon_names[icon_synonim(icon_key(key))]
     end
 
@@ -81,9 +80,13 @@ module EvilIcons
       File.join(assets_dir, 'icons')
     end
 
+    def icons
+      Dir[File.join(self.images_dir, "*#{ICON_EXTENTION}")]
+    end
+
     def icon_names
       Hash[
-        Dir[File.join(self.images_dir, "*#{ICON_EXTENTION}")].map {|i|
+        self.icons.map {|i|
           [File.basename(i, ICON_EXTENTION), File.basename(i, ICON_EXTENTION)]
         }
       ].tap do |h|
