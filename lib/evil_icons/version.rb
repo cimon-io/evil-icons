@@ -1,3 +1,3 @@
 module EvilIcons
-  VERSION = "1.7.6"
+  VERSION = "0.0.1"
 end

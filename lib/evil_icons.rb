@@ -19,19 +19,15 @@ module EvilIcons
     end
 
     def root_dir
-      File.expand_path('../../', __FILE__)
+      File.expand_path "."
     end
 
     def assets_dir
-      File.join(root_dir, 'assets')
-    end
-
-    def images_dir
-      File.join(assets_dir, 'icons')
+      File.join(root_dir, 'app', 'assets')
     end
 
     def sprite_file
-      File.join(root_dir, 'assets', 'sprite.svg')
+      File.join(assets_dir, 'images', 'sprite.svg')
     end
 
     private
@@ -41,8 +37,7 @@ module EvilIcons
     end
 
     def register_sprockets
-      Sprockets.append_path(images_dir)
-      Sprockets.append_path(assets_dir)
+      Sprockets.append_path(File.join(File.expand_path('../../', __FILE__), 'assets'))
     end
 
     def register_helpers
