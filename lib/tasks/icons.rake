@@ -14,8 +14,6 @@ namespace :evil_icons do
 
   desc "Normalize filenames"
   task :normalize_filenames do
-    binding.pry
-
     EvilIcons.icons.each do |old_name|
       next unless old_name.include?('_')
 
