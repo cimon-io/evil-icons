@@ -20,40 +20,36 @@
   height: 0;
   overflow: hidden;
   fill: currentColor;
+  vertical-align: middle;
 
   &[data-icon-size=xsm] {
-    width: 8px;
-    height: 8px;
+    width: .5em;
+    height: .5em;
   }
 
   &[data-icon-size=sm] {
-    width: 12px;
-    height: 12px;
+    width: .8em;
+    height: .8em;
   }
 
   &[data-icon-size=m] {
-    width: 18px;
-    height: 18px;
-  }
-
-  &[data-icon-size=md] {
-    width: 50px;
-    height: 50px;
+    width: 1em;
+    height: 1em;
   }
 
   &[data-icon-size=lg] {
-    width: 75px;
-    height: 75px;
+    width: 1.2em;
+    height: 1.2em;
   }
 
   &[data-icon-size=xl] {
-    width: 100px;
-    height: 100px;
+    width: 1.8em;
+    height: 1.8em;
   }
 
   &[data-icon-size=xxl] {
-    width: 200px;
-    height: 200px;
+    width: 2.4em;
+    height: 2.4em;
   }
 
   &.spinner {
@@ -74,6 +70,7 @@
     height: 100%;
     background: inherit;
     fill: inherit;
+    position: absolute;
     transform: translateX(0); /* Crisp fix for non-retina */
     -ms-transform: translate(0.5px, -0.3px); /* Crisp fix for IE */
   }

@@ -10,6 +10,7 @@ module EvilIcons
     sm: 'sm',
     medium: 'm',
     m: 'm',
+    md: 'm',
     large: 'lg',
     lg: 'lg',
     big: 'xl',
