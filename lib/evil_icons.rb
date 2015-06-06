@@ -3,8 +3,13 @@ require_relative "evil_icons/version"
 module EvilIcons
 
   ICON_SIZES = ({
+    xsmall: 'xsm',
+    extrasmall: 'xsm',
+    xsm: 'xsm',
     small: 'sm',
     sm: 'sm',
+    medium: 'm',
+    m: 'm',
     large: 'lg',
     lg: 'lg',
     big: 'xl',
@@ -12,7 +17,7 @@ module EvilIcons
     huge: 'xxl',
     xxl: 'xxl'
   }).with_indifferent_access
-  ICON_SIZES.default_proc = ->(h, i) { logger.warn("'#{i}' is wrong size of icon. Use one of #{h.keys.join(', ')}"); i.to_s; }
+  ICON_SIZES.default_proc = ->(h, i) { Rails.logger.warn("'#{i}' is wrong size of icon. Use one of #{h.keys.join(', ')}"); i.to_s; }
 
   ICON_EXTENTION = '.svg'
 
@@ -29,9 +34,9 @@ module EvilIcons
     end
 
     def icon_synonim(key)
-      ICON_SYNONIMS_HASH.with_indifferent_access.tap do |h|
-        h.default_proc = ->(_, i) { i.to_s }
-      end
+      h = ICON_SYNONIMS_HASH.with_indifferent_access
+      h.default_proc = ->(_, i) { i.to_s }
+      h
     end
 
     def icon_key(n)
@@ -46,6 +51,7 @@ module EvilIcons
     end
 
     def icon_name(key)
+      binding.pry
       icon_names[icon_synonim(icon_key(key))]
     end
 
@@ -77,11 +83,11 @@ module EvilIcons
 
     def icon_names
       Hash[
-        Dir[self.images_dir.join("*#{ICON_EXTENTION}")].map {|i|
+        Dir[File.join(self.images_dir, "*#{ICON_EXTENTION}")].map {|i|
           [File.basename(i, ICON_EXTENTION), File.basename(i, ICON_EXTENTION)]
         }
       ].tap do |h|
-        h.default_proc = ->(_, i) { logger.warn("'#{i}' is wrong icon name. Use one of #{h.keys.join(', ')}"); i.to_s }
+        h.default_proc = ->(_, i) { Rails.logger.warn("'#{i}' is wrong icon name. Use one of #{h.keys.join(', ')}"); i.to_s }
       end
     end
 
