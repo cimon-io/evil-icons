@@ -11,9 +11,7 @@ module EvilIcons
     end
 
     def files
-      @_files ||= begin
-        Dir.entries(@svg_path).select { |f| File.extname(f) == '.svg' }
-      end
+      EvilIcons::ICON_NAMES
     end
 
     def read_svg(filename)
@@ -34,7 +32,7 @@ module EvilIcons
         container   = g.empty? ? svg : g
 
         shape       = container.children.map {|c| c.to_s}.join('')
-        name        = File.basename(name, '.svg')
+        name        = File.basename(name, EvilIcons::ICON_EXTENTION)
 
         { name: name, viewbox: viewbox, shape: shape }
       end
@@ -50,9 +48,8 @@ module EvilIcons
       optimize(result, template)
     end
 
-    def generate(template)
-      path = File.join(EvilIcons.assets_dir, template)
-      file = File.new(path, 'w')
+    def generate(template, destination_path)
+      file = File.new(destination_path, 'w')
       file.write sprite(template)
       file.close
     end

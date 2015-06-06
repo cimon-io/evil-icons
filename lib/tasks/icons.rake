@@ -9,7 +9,7 @@ namespace :evil_icons do
   desc "Generate SVG icons sprite"
   task :process => [:normalize_filenames, :optimize] do
     generator = EvilIcons::Generator.new(EvilIcons.images_dir)
-    generator.generate("sprite.svg")
+    generator.generate("sprite.svg", EvilIcons.sprite_file)
   end
 
   desc "Normalize filenames"

@@ -1,36 +1,27 @@
 module EvilIcons
   module Helpers
 
-    def evil_icons_sprite
+    def icons_sprite
       html_safe File.new(EvilIcons.sprite_file).read
     end
 
-    def evil_icon(name, options = {})
-      size  = options[:size] ? "icon--#{options[:size]}" : ''
-      options[:class] = "icon icon--#{name} #{size} #{options[:class]}"
+    def icon_tag(name, options = {})
+      size = EvilIcons::ICON_SIZES[options.delete(:size)]
+      styleclass = ['icon', options.delete(:class)].join(' ')
 
-      icon = "<svg class='icon__cnt'><use xlink:href='##{name}-icon'/></svg>"
-
-      html_safe "
-        <div class='#{options[:class]}'>
-          #{wrap_spinner icon, options[:class]}
-        </div>
-      "
-    end
-
-
-    private
-
-    def wrap_spinner(html, klass)
-      if klass.include?("spinner")
-        html_safe "<div class='icon__spinner'>#{html}</div>"
-      else
-        html
+      content_tag(:span, {class: styleclass, data: { icon: icon_name(name), 'icon-size' => size }}.deep_merge(options)) do
+        content_tag(:span, class: 'icon--wrapper' do
+          content_tag(:svg, class: 'icon--cnt') do
+            content_tag('use', 'xlink:href' => "##{name}-icon")
+          end
+        end
       end
     end
 
-    def html_safe(html)
-      html.respond_to?(:html_safe) ? html.html_safe : html
+    def icon_name(key)
+      name = EvilIcons.icon_name(icon_key(key))
+      logger.warn "No icon '#{key}' in `#{ICON_PATH}`" if name.nil?
+      name || key
     end
 
   end
