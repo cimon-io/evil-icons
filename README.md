@@ -5,18 +5,6 @@ Free ‘plug and play’ set of SVG icons designed specifically for web projects
 [Alexander Madyankin]:  https://twitter.com/outpunk
 [Roman Shamin]:         https://twitter.com/romanshamin
 
-## Usage
-
-* [Supported browsers](#supported-browsers)
-* [Grunt](#grunt)
-* [Gulp](#gulp)
-* [CDN](#cdn)
-* [Rails](#rails)
-* [Sinatra](#sinatra)
-* [npm](#npm)
-* [React](#react)
-* [Styling](#styling)
-
 ### Supported browsers
 We support IE 9+, Firefox, Chrome, Safari (desktop and mobile), Opera, Android 4+.
 http://caniuse.com/#search=inline%20svg
