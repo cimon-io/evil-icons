@@ -14,14 +14,7 @@ module EvilIcons
   }).with_indifferent_access
   ICON_SIZES.default_proc = ->(h, i) { logger.warn("'#{i}' is wrong size of icon. Use one of #{h.keys.join(', ')}"); i.to_s; }
 
-  ICON_PATH = self.images_dir
   ICON_EXTENTION = '.svg'
-  ICON_NAMES = Hash[
-    Dir[ICON_PATH.join("*#{ICON_EXTENTION}")].map {|i|
-      [File.basename(i, ICON_EXTENTION), File.basename(i, ICON_EXTENTION)]
-    }
-  ]
-  ICON_NAMES.default_proc = ->(_, i) { logger.warn("'#{i}' is wrong icon name. Use one of #{h.keys.join(', ')}"); i.to_s }
 
   ICON_SYNONIMS_HASH = if File.exists? File.join("config", "icon_synonims.yml")
     YAML.load(ERB.new(IO.read(File.join("config", "icon_synonims.yml"))).result)
@@ -53,7 +46,7 @@ module EvilIcons
     end
 
     def icon_name(key)
-      ICON_NAMES[icon_synonim(icon_key(key))]
+      icon_names[icon_synonim(icon_key(key))]
     end
 
     def register!
@@ -80,6 +73,16 @@ module EvilIcons
 
     def images_dir
       File.join(assets_dir, 'icons')
+    end
+
+    def icon_names
+      Hash[
+        Dir[self.images_dir.join("*#{ICON_EXTENTION}")].map {|i|
+          [File.basename(i, ICON_EXTENTION), File.basename(i, ICON_EXTENTION)]
+        }
+      ].tap do |h|
+        h.default_proc = ->(_, i) { logger.warn("'#{i}' is wrong icon name. Use one of #{h.keys.join(', ')}"); i.to_s }
+      end
     end
 
     def sprite_file
