@@ -5,18 +5,16 @@ require "evil_icons"
 module EvilIcons
 
   class Generator
-    def initialize(svg_path)
-      @svg_path       = svg_path
+    def initialize
       @templates_dir  = File.expand_path('../../templates', __FILE__)
     end
 
     def files
-      EvilIcons::ICON_NAMES
+      EvilIcons.icons
     end
 
     def read_svg(filename)
-      file = File.join(@svg_path, filename)
-      File.read(file)
+      File.read(filename)
     end
 
     def icons
