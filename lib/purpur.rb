@@ -23,7 +23,7 @@ module Purpur
   ICON_EXTENTION = '.svg'
 
   ICON_SYNONIMS_HASH = if File.exists? File.join("config", "icon_synonims.yml")
-    YAML.load(ERB.new(IO.read(File.join("config", "icon_synonims.yml"))).result)
+    YAML.load(ERB.new(IO.read(File.join("config", "icon_synonims.yml"))).result) || {}
   else
     {}
   end
