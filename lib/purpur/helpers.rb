@@ -2,7 +2,7 @@ module Purpur
   module Helpers
 
     def icon_tag(name, options = {})
-      size = Purpur::ICON_SIZES[options.delete(:size)]
+      size = Purpur::ICON_SIZES[options.delete(:size) { :medium }]
       styleclass = ['icon', options.delete(:class)].join(' ')
 
       content_tag(:span, {class: styleclass, data: { icon: Purpur.icon_name(name), 'icon-size' => size }}.deep_merge(options)) do
