@@ -14,5 +14,9 @@ module Purpur
       end
     end
 
+    def purpur_meta_tag
+      tag(:meta, name: 'purpurAssetPath', content: asset_url('purpur.svg'))
+    end
+
   end
 end

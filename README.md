@@ -41,6 +41,15 @@ Here are some examples:
 <%= icon_tag 'envelope', size: :l, class: "custom-class" %>
 ```
 
+If you would like to use icons on the client side only, include `purpur_meta_tag` to the `head` section and require `purpur.js`.
+You'll have `purpur` object with method `html` which return raw html to insert. Example:
+
+```javascirpt
+  purpur.html('profile')
+```
+
+The meta tag is needed to know the path to the `purpur.svg` resource.
+
 ## Roadmap
 * Implement possibility to use ourside rails.
 * Allow to set animated icons inside icons
