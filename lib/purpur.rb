@@ -2,7 +2,6 @@ require_relative "purpur/version"
 
 module Purpur
 
-  # TODO: do not forget to change duplication of this list in purpur.js
   ICON_SIZES = ({
     xsmall: 'xsm',
     extrasmall: 'xsm',
