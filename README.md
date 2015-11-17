@@ -51,7 +51,7 @@ You'll have `purpur` object with method `html` which return raw html to insert. 
 The meta tag is needed to know the path to the `purpur.svg` resource.
 
 ## Roadmap
-* Implement possibility to use ourside rails.
+* Implement possibility to use outside rails.
 * Allow to set animated icons inside icons
 * Describe algorithm to create cvg icons
 * Implement responsive icons
