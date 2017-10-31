@@ -7,7 +7,7 @@ require 'csso'
 namespace :purpur do
 
   desc "Generate SVG icons sprite"
-  task :process => [:normalize_filenames, :optimize] do
+  task :process => [:normalize_filenames] do
     generator = Purpur::Generator.new
     generator.generate("purpur.svg", Purpur.sprite_file)
   end
